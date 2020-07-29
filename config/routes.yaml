@@ -7,6 +7,7 @@
 user:
     path: /usuario
     controller: App\Controller\UserController::index
+    methods: [POST]
 
 
 # RUTAS PARA CONTROLADOR: VIDEO #
