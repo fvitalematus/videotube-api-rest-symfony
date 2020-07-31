@@ -88,28 +88,53 @@ class UserController extends AbstractController
             ]);
 
             if(!empty($email) && count($validate_email) == 0 && !empty($password) && !empty($name) && !empty($surname)){
-                $data = [
-                    'status' => 'success',
-                    'code' => 200,
-                    'message' => 'VALIDACION CORRECTA'            
-                ];
-            }else{
-                $data = [
-                    'status' => 'error',
-                    'code' => 200,
-                    'message' => 'VALIDACION INCORRECTA'            
-                ];
+                // Si la validacion es correcta, crear el objeto del usuario.   
+
+                $user = new User();
+                $user->SetName($name);
+                $user->SetSurname($surname);  
+                $user->SetEmail($email);  
+                $user->SetRole('ROLE_USER');
+                $user->setCreatedAt(new \Datetime('now'));                      
+
+                // Cifrar la contraseña.
+                $pwd = hash('sha256', $password);
+                $user->setPassword($pwd);
+
+                $data = $user;
+
+                // Comprobar si el usuario existe (duplicados).
+                $doctrine = $this->getDoctrine();
+                $em = $this->getDoctrine()->getManager();
+
+                $user_repo = $doctrine->getRepository(User::class);
+                $isset_user = $user_repo->findBy(array(
+                    'email' => $email
+                ));
+
+                // Si no existe, guardarlo en la BD.
+                if(count($isset_user) == 0){
+                    // Guardo el usuario
+                    $em->persist($user);
+                    $em->flush();
+
+                    $data = [
+                        'status' => 'success',
+                        'code' => 200,
+                        'message' => 'El usuario se ha creado correctamente.',
+                        'user' => $user          
+                    ];
+                }else{
+                    $data = [
+                        'status' => 'error',
+                        'code' => 400,
+                        'message' => 'El usuario ya existe.'            
+                    ];
+                }
+            
             }
             
-        }           
-
-        // Si la validacion es correcta, crear el objeto del usuario.
-
-        // Cifrar la contraseña.
-
-        // Comprobar si el usuario existe (duplicados).
-
-        // Si no existe, guardarlo en la BD.
+        } 
 
         // Hacer respuesta en JSON.
         return new JsonResponse($data);
