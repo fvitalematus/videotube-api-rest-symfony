@@ -205,7 +205,7 @@ class UserController extends AbstractController {
             $identity = $jwt_auth->checkToken($token, true);
 
             // Conseguir el usuario a actualizar completo
-            $user_repo = $this->getRepository(User::class);
+            $user_repo = $this->getDoctrine()->getRepository(User::class);
             $user = $user_repo->findOneBy([
                 'id' => $identity->sub
             ]);

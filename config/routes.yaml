@@ -29,3 +29,7 @@ video:
     path: /video
     controller: App\Controller\VideoController::index
 
+video_new:
+    path: /video/new
+    controller: App\Controller\VideoController::create
+    methods: [POST]
