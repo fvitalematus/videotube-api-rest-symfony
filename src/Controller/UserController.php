@@ -188,33 +188,77 @@ class UserController extends AbstractController {
         // Crear un metodo para comprobar si el token es correcto
         $authCheck = $jwt_auth->checkToken($token);
 
-        // Si es correcto, hacer la actualización del usuario 
-        if($authCheck){
-            // Actualizar al usuario
-            
-            // Conseguir Entity Manager
-            
-            // Conseguir los datos del usuario identificado
-            
-            // Conseguir el usuario a actualizar completo
-            
-            // Recoger datos por post
-            
-            // Comprobar y validar los datos
-            
-            // Asignar nuevos datos al objeto del usuario
-            
-            // Comprobar duplicadors
-            
-            // Guardar cambios en la base de datos
-        }
-
+        // Respuesta por defecto
         $data = [
             'status' => 'error',
-            'message' => "Metodo update del controlador usuarios",
-            'token' => $token,
-            'authCheck' => $authCheck
+            'code' => 400,
+            'message' => 'Usuario NO ACTUALIZADO'
         ];
+
+        // Si es correcto, hacer la actualización del usuario 
+        if ($authCheck) {
+            // Actualizar al usuario
+            // Conseguir Entity Manager
+            $em = $this->getDoctrine()->getManager();
+
+            // Conseguir los datos del usuario identificado
+            $identity = $jwt_auth->checkToken($token, true);
+
+            // Conseguir el usuario a actualizar completo
+            $user_repo = $this->getRepository(User::class);
+            $user = $user_repo->findOneBy([
+                'id' => $identity->sub
+            ]);
+
+            // Recoger datos por post
+            $json = $request->get('json', null);
+            $params = json_decode($json);
+
+            // Comprobar y validar los datos
+            if (!empty($json)) {
+
+                $name = (!empty($params->name)) ? $params->name : null;
+                $surname = (!empty($params->surname)) ? $params->surname : null;
+                $email = (!empty($params->email)) ? $params->email : null;
+
+                $validator = Validation:: createValidator();
+                $validate_email = $validator->validate($email, [
+                    new Email()
+                ]);
+
+                if (!empty($email) && count($validate_email) == 0 && !empty($name) && !empty($surname)) {
+
+                    // Asignar nuevos datos al objeto del usuario 
+                    $user->setEmail($email);
+                    $user->setName($name);
+                    $user->setSurname($surname);
+
+                    // Comprobar duplicadors
+                    $isset_user = $user_repo->findBy([
+                        'email' => $email
+                    ]);
+
+                    if (count($isset_user) == 0 || $identity->email == $email) {
+                        // Guardar cambios en la base de datos
+                        $em->persist($user);
+                        $em->flush();
+
+                        $data = [
+                            'status' => 'success',
+                            'code' => 200,
+                            'message' => 'Usuario ACTUALIZADO',
+                            'user' => $user
+                        ];
+                    } else {
+                        $data = [
+                            'status' => 'error',
+                            'code' => 400,
+                            'message' => 'Ese email ya existe, prueba otro'
+                        ];
+                    }
+                }
+            }
+        }
 
         return $this->resjson($data);
     }
