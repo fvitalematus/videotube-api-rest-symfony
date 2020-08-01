@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints\Email;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\User;
 use App\Entity\Video;
 use App\Services\JwtAuth;
@@ -104,6 +105,55 @@ class VideoController extends AbstractController {
         }
 
         // Devolver una respuesta
+        return $this->resjson($data);
+    }
+
+    public function videos(Request $request, JwtAuth $jwt_auth, PaginatorInterface $paginator) {
+
+        // Recoger la cabezera de autenticación
+        $token = $request->headers->get('Authorization');
+
+        // Comprobar el token
+        $authCheck = $jwt_auth->checkToken($token);
+
+        // Si es valido,
+        if ($authCheck) {
+            // Conseguir la identidad del usuario
+            $identity = $jwt_auth->checkToken($token, true);
+
+            $em = $this->getDoctrine()->getManager();
+
+            // Hacer una consulta para paginar
+            $dql = "SELECT v FROM App\Entity\Video v WHERE v.user = {$identity->sub} ORDER BY v.id DESC";
+            $query = $em->createQuery($dql);
+
+            // Recoger el parametro page de la url
+            $page = $request->query->getInt('page', 1);
+            $items_per_page = 5;
+
+            // Invocar paginación
+            $pagination = $paginator->paginate($query, $page, $items_per_page);
+            $total = $pagination->getTotalItemCount();
+
+            // Preparar array de datos para devolver
+            $data = array(
+                'status' => 'success',
+                'code' => 200,
+                'total_items_count' => $total,
+                'page_actual' => $page,
+                'items_per_page' => $items_per_page,
+                'total_pages' => ceil($total / $items_per_page),
+                'videos' => $pagination,
+                'user_id' => $identity->sub
+            );
+        } else {
+            // Si falla devolver esto:
+            $data = array(
+                'status' => 'error',
+                'code' => 404,
+                'message' => 'No se pueden listar los videos en este momento'
+            );
+        }
 
         return $this->resjson($data);
     }

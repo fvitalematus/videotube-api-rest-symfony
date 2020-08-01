@@ -25,6 +25,7 @@ user_edit:
     methods: [PUT]
 
 # RUTAS PARA CONTROLADOR: VIDEO #
+
 video:
     path: /video
     controller: App\Controller\VideoController::index
@@ -33,3 +34,8 @@ video_new:
     path: /video/new
     controller: App\Controller\VideoController::create
     methods: [POST]
+    
+video_list:
+    path: /video/list
+    controller: App\Controller\VideoController::videos
+    methods: [GET]
