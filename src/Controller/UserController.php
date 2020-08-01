@@ -133,7 +133,7 @@ class UserController extends AbstractController {
         }
 
         // Hacer respuesta en JSON.
-        return new JsonResponse($data);
+        return new resjson($data);
     }
 
     public function login(Request $request, JwtAuth $jwt_auth) {
@@ -174,10 +174,49 @@ class UserController extends AbstractController {
 
                 return new JsonResponse($signup);
             }
-
-            // Si no devuelvo bien los datos, respuesta http
-            return new JsonResponse($signup);
         }
+
+        // Si no devuelvo bien los datos, respuesta http
+        return $this->resjson($data);
+    }
+
+    public function edit(Request $request, JwtAuth $jwt_auth) {
+
+        // Recoger la cabecera de autenticación
+        $token = $request->headers->get('Authorization');
+
+        // Crear un metodo para comprobar si el token es correcto
+        $authCheck = $jwt_auth->checkToken($token);
+
+        // Si es correcto, hacer la actualización del usuario 
+        if($authCheck){
+            // Actualizar al usuario
+            
+            // Conseguir Entity Manager
+            
+            // Conseguir los datos del usuario identificado
+            
+            // Conseguir el usuario a actualizar completo
+            
+            // Recoger datos por post
+            
+            // Comprobar y validar los datos
+            
+            // Asignar nuevos datos al objeto del usuario
+            
+            // Comprobar duplicadors
+            
+            // Guardar cambios en la base de datos
+        }
+
+        $data = [
+            'status' => 'error',
+            'message' => "Metodo update del controlador usuarios",
+            'token' => $token,
+            'authCheck' => $authCheck
+        ];
+
+        return $this->resjson($data);
     }
 
 }
