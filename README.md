@@ -23,3 +23,16 @@ JSON de configuración
 Portfolio: Node JS.
 
 Curso de Node JS | Nombre: Franco Vitale M. | franco.vitalematus@gmail.com
+
+# Postman: Login + Token  // POST
+![postman-POST-login-token-symfony](https://user-images.githubusercontent.com/66401629/89973024-4bb4ca80-dc2d-11ea-9b53-e4e02df2c256.png)
+# Postman: Nuevo Video  // POST
+![postman-POST-nuevo-video-symfony](https://user-images.githubusercontent.com/66401629/89973026-4c4d6100-dc2d-11ea-8bd3-a4a9486a7654.png)
+# Postman: Detalles del Video  // GET
+![postman-GET-video-detail-symfony](https://user-images.githubusercontent.com/66401629/89973022-4bb4ca80-dc2d-11ea-92e9-d244a0b6030a.png)
+# Postman: Editar Video  // PUT
+![postman-PUT-video-edit-symfony](https://user-images.githubusercontent.com/66401629/89973015-49eb0700-dc2d-11ea-993c-06251d1cdf2f.png)
+# Postman: Borrar Video  // DELETE
+![postman-delete-video-symfony](https://user-images.githubusercontent.com/66401629/89973017-4a839d80-dc2d-11ea-8634-9215b9b46307.png)
+# Diagrama de la Base de Datos.
+![Diagrama-api-symfony](https://user-images.githubusercontent.com/66401629/89973016-4a839d80-dc2d-11ea-810c-83f0d92ec6df.png)
