@@ -1,6 +1,6 @@
 # VideoTube: API RESTful con Symfony: Desarrollo Back-End y tópicos con ejemplos funcionales y su versión en PHP.
 
-<p align="center"><img src="https://user-images.githubusercontent.com/66401629/88009122-bd42a280-cadf-11ea-97d5-4ecbfdbbb270.png" width="400"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/66401629/89972911-098b8900-dc2d-11ea-97e6-906f97e6aa27.png"></p>
 
 
 <p align="center">
