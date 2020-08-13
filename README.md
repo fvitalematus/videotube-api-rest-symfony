@@ -1,4 +1,4 @@
-# VideoTube: API RESTful con Symfony: Desarrollo Back-End y tópicos con ejemplos funcionales y su versión en PHP.
+# API RESTful con Symfony: Desarrollo Back-End y tópicos con ejemplos funcionales y su versión en PHP.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/66401629/89972911-098b8900-dc2d-11ea-97e6-906f97e6aa27.png"></p>
 
@@ -7,9 +7,9 @@
 
 </p>
 
-Este repositorio incluye: Desarrollo de un API RESTful con el framework Node JS, con el objetivo de crear una aplicación de un Foro. Primero se realizará el backend con Node JS y luego el frontend con Angular.
+Este repositorio incluye: Desarrollo de un API RESTful con el framework Symfony, con el objetivo de crear una aplicación VideoTube. Primero se realizará el backend con Symfony y luego el frontend con Angular.
 
-- MongoDB para hacer la conexión con la base de datos..
+- MySQL para hacer la conexión con la base de datos..
 - Modelos, controladores y rutas automatizadas.
 - Sistema y registro de usuario, validar y guardar la información.
 - Login de usuario con JWT (JSON WEB TOKEN) para hacer la autenticación.
@@ -20,9 +20,9 @@ Este repositorio incluye: Desarrollo de un API RESTful con el framework Node JS,
 
 JSON de configuración
 
-Portfolio: Node JS.
+Portfolio: Symfony.
 
-Curso de Node JS | Nombre: Franco Vitale M. | franco.vitalematus@gmail.com
+Curso de Symfony | Nombre: Franco Vitale M. | franco.vitalematus@gmail.com
 
 # Postman: Login + Token  // POST
 ![postman-POST-login-token-symfony](https://user-images.githubusercontent.com/66401629/89973024-4bb4ca80-dc2d-11ea-9b53-e4e02df2c256.png)
