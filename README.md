@@ -9,14 +9,14 @@
 
 Este repositorio incluye: Desarrollo de un API RESTful con el framework Symfony, con el objetivo de crear una aplicación VideoTube. Primero se realizará el backend con Symfony y luego el frontend con Angular.
 
-- MySQL para hacer la conexión con la base de datos..
-- Modelos, controladores y rutas automatizadas.
-- Sistema y registro de usuario, validar y guardar la información.
-- Login de usuario con JWT (JSON WEB TOKEN) para hacer la autenticación.
-- Middleware para comprobar la autenticación de los usuarios en cada ruta.
-- Ajustes de usuario, actualización de datos y subir imagen avatar.
-- Sistema de Categorías: Guardar, actualizar, eliminar y mostrar categorías.
-- Sistema de Publicaciones: Guardar, actualizar, eliminar y mostrar publicaciones.
+- MySQL para hacer la conexión con la base de datos.
+- Modelos y Entidades con Doctrine.
+- Peticiones y respuestas HTTP.
+- Sistema de Registro y Login de Usuarios con JWT (JSON WEB TOKEN) para hacer la autenticación.
+- Sistema de Ajustes de usuario y actualización de datos.
+- Sistema de Detalle, Listados y Paginación de los videos favoritos
+- Sistema para Guardar, Actualizar y Eliminar videos favoritos.
+- Configuracion del CORS en el API RESTful de Symfony.
 
 JSON de configuración
 
