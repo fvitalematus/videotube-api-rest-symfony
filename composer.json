@@ -24,7 +24,7 @@
         "symfony/maker-bundle": "1.11",
         "symfony/orm-pack": "1.0",
         "symfony/property-access": "4.2.*",
-        "symfony/serializer": "4.2.*",
+        "symfony/serializer": "4.4.*",
         "symfony/validator": "4.2.*",
         "symfony/yaml": "4.2.*"
     },
